@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query("SELECT MAX(p.id) FROM product p WHERE p.category = :category")
+    @Query("SELECT MAX(p.id) FROM Product p WHERE p.category = :category")
     Optional<Product> findMaxIdByCategory(@Param("category") String category);
 
 }
