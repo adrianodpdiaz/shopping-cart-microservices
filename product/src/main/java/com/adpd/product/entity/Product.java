@@ -1,10 +1,10 @@
-package com.adpd.customer.entity;
+package com.adpd.product.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.util.Objects;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -13,24 +13,26 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "customer")
+@Table(name = "product")
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "customerCache")
-public class Customer implements Serializable {
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "productCache")
+public class Product implements Serializable {
 
     @Id
     @Column
-    @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer_id_sequence")
+    @SequenceGenerator(name = "product_id_sequence", sequenceName = "product_id_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "product_id_sequence")
     private Integer id;
     @Column
-    private String firstName;
+    private String name;
     @Column
-    private String lastName;
+    private String description;
     @Column
-    private String email;
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
+    private String sku;
+    @Column
+    private String category;
+    @Column
+    private BigDecimal price;
 
     @Override
     public boolean equals(Object o) {
@@ -40,7 +42,7 @@ public class Customer implements Serializable {
         if(o == null || getClass() != o.getClass()) {
             return false;
         }
-        Customer other = (Customer) o;
+        Product other = (Product) o;
         return getId() != null && Objects.equals(getId(), other.getId());
     }
 

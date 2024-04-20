@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class CustomerCacheTest {
+class CustomerTest {
 
     @Autowired
     private CustomerRepository customerRepository;
