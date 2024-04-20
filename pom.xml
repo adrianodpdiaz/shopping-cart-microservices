@@ -28,7 +28,9 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 
         <spring-boot.version>3.2.4</spring-boot.version>
+        <springdoc.version>2.5.0</springdoc.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
+
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <postgresql.version>42.7.3</postgresql.version>
@@ -84,6 +86,11 @@
                 <groupId>org.ehcache</groupId>
                 <artifactId>ehcache</artifactId>
                 <version>${ehcache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
