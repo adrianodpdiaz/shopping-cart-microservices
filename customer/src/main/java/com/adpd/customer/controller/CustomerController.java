@@ -1,8 +1,8 @@
 package com.adpd.customer.controller;
 
-import com.adpd.customer.resource.CustomerDTO;
+import com.adpd.customer.resource.inbound.RegisterCustomerInbound;
+import com.adpd.customer.resource.outbound.CustomerDTO;
 import com.adpd.customer.service.CustomerService;
-import com.adpd.customer.resource.RegisterCustomerRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
@@ -24,14 +24,14 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping
-    @Transactional
     @Operation(
             summary = "Register new customer",
             description = "Post endpoint to register a new customer."
     )
-    public ResponseEntity<Void> registerCustomer(@Valid @RequestBody RegisterCustomerRequest registerCustomerRequest) {
-        Integer customerId = customerService.registerCustomer(registerCustomerRequest);
+    @Transactional
+    @PostMapping
+    public ResponseEntity<Void> registerCustomer(@Valid @RequestBody RegisterCustomerInbound registerCustomerInbound) {
+        Integer customerId = customerService.registerCustomer(registerCustomerInbound);
         log.info("registered customer {}", customerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

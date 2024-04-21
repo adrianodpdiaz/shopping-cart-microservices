@@ -1,8 +1,8 @@
 package com.adpd.customer.service;
 
 import com.adpd.customer.mapping.CustomerMapper;
-import com.adpd.customer.resource.CustomerDTO;
-import com.adpd.customer.resource.RegisterCustomerRequest;
+import com.adpd.customer.resource.outbound.CustomerDTO;
+import com.adpd.customer.resource.inbound.RegisterCustomerInbound;
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,8 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
-    public Integer registerCustomer(RegisterCustomerRequest registerCustomerRequest) {
-        Customer customer = customerMapper.requestToEntity(registerCustomerRequest);
+    public Integer registerCustomer(RegisterCustomerInbound registerCustomerInbound) {
+        Customer customer = customerMapper.requestToEntity(registerCustomerInbound);
         customerRepository.saveAndFlush(customer);
         return customer.getId();
     }

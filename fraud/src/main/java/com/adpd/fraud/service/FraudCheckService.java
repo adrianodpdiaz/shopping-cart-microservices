@@ -13,12 +13,13 @@ public class FraudCheckService {
 
     private final FraudCheckRepository fraudCheckRepository;
 
-    public FraudCheckHistory isFraudulentCustomer(String customerId) {
+    public boolean isFraudulentCustomer(Integer customerId) {
         FraudCheckHistory fraudCheckHistory = FraudCheckHistory.builder()
                 .customerId(customerId)
                 .isFraudster(false)
                 .createdAt(LocalDateTime.now())
                 .build();
-        return fraudCheckRepository.save(fraudCheckHistory);
+        fraudCheckRepository.saveAndFlush(fraudCheckHistory);
+        return false;
     }
 }

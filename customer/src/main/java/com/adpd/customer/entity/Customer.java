@@ -27,7 +27,7 @@ public class Customer implements Serializable {
     private String firstName;
     @Column
     private String lastName;
-    @Column
+    @Column(unique = true)
     private String email;
     @Column(name = "birth_date")
     private LocalDate birthDate;

@@ -1,4 +1,4 @@
-package com.adpd.customer.resource;
+package com.adpd.customer.resource.outbound;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

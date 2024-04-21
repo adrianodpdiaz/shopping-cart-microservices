@@ -1,7 +1,7 @@
 package com.adpd.product.controller;
 
-import com.adpd.product.resource.ProductDTO;
-import com.adpd.product.resource.RegisterProductRequest;
+import com.adpd.product.resource.outbound.ProductDTO;
+import com.adpd.product.resource.inbound.RegisterProductInbound;
 import com.adpd.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,8 +24,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @PostMapping
-    @Transactional
     @Operation(
             summary = "Register new product",
             description = "Post endpoint to register a new product.\n" +
@@ -33,8 +31,10 @@ public class ProductController {
                     "will be generated with the pattern: First two characters from category in uppercase + \"2267T\" " +
                     "+ a sequence increasing identifier according to the number of items registered."
     )
-    public ResponseEntity<Void> registerProduct(@Valid @RequestBody RegisterProductRequest registerProductRequest) {
-        Integer productId = productService.registerProduct(registerProductRequest);
+    @Transactional
+    @PostMapping
+    public ResponseEntity<Void> registerProduct(@Valid @RequestBody RegisterProductInbound registerProductInbound) {
+        Integer productId = productService.registerProduct(registerProductInbound);
         log.info("registered product {}", productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

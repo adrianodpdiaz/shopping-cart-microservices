@@ -1,4 +1,4 @@
-package com.adpd.product.resource;
+package com.adpd.product.resource.inbound;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +7,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class RegisterProductRequest {
+public class RegisterProductInbound {
 
     @NotEmpty(message = "product name is required")
     private String name;
