@@ -13,13 +13,13 @@
         <module>customer</module>
         <module>fraud</module>
         <module>product</module>
+        <module>eureka-server</module>
     </modules>
 
 
     <properties>
         <revision>1.0-SNAPSHOT</revision>
         <java.version>17</java.version>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -28,6 +28,7 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 
         <spring-boot.version>3.2.4</spring-boot.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
         <springdoc.version>2.5.0</springdoc.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
 
@@ -49,6 +50,13 @@
                 <version>${spring-boot.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
