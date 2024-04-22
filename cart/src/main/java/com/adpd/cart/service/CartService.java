@@ -5,6 +5,7 @@ import com.adpd.cart.mapping.CartMapper;
 import com.adpd.cart.repository.CartRepository;
 import com.adpd.cart.resource.inbound.CreateCartInbound;
 import com.adpd.cart.resource.outbound.CartDTO;
+import com.adpd.feignclients.customer.CustomerClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,12 @@ public class CartService {
 
     private final CartRepository cartRepository;
     private final CartMapper cartMapper;
+    private final CustomerClient customerClient;
 
     public Long createCart(CreateCartInbound createCartInbound) {
+        // validate customer
+        customerClient.getCustomer(createCartInbound.getCustomerId());
+
         Cart cart = cartMapper.requestToEntity(createCartInbound);
         cart.getItems().forEach(item -> item.setCart(cart));
         try {
@@ -29,6 +34,7 @@ public class CartService {
             }
             throw ex;
         }
+
         return cart.getId();
     }
 

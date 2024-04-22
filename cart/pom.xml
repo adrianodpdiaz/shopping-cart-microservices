@@ -39,6 +39,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.adpd</groupId>
+            <artifactId>feign-clients</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
