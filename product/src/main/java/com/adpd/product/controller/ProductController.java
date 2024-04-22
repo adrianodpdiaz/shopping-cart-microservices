@@ -34,9 +34,9 @@ public class ProductController {
     @Transactional
     @PostMapping
     public ResponseEntity<Void> registerProduct(@Valid @RequestBody RegisterProductInbound registerProductInbound) {
-        Integer productId = productService.registerProduct(registerProductInbound);
+        Long productId = productService.registerProduct(registerProductInbound);
         log.info("registered product {}", productId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Operation(
@@ -44,7 +44,7 @@ public class ProductController {
             description = "Get endpoint to get a product's information."
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProduct(@PathVariable("id") Integer id) {
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable("id") Long id) {
         ProductDTO productDTO = productService.getProduct(id);
         log.info("retrieved product {}", id);
         return new ResponseEntity<>(productDTO, HttpStatus.OK);

@@ -1,6 +1,7 @@
 package com.adpd.customer.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -22,11 +23,12 @@ public class Customer implements Serializable {
     @Column
     @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer_id_sequence")
-    private Integer id;
+    private Long id;
     @Column
     private String firstName;
     @Column
     private String lastName;
+    @NotNull
     @Column(unique = true)
     private String email;
     @Column(name = "birth_date")

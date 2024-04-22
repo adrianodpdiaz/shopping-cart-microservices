@@ -1,6 +1,7 @@
 package com.adpd.product.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ public class Product implements Serializable {
     @Column
     @SequenceGenerator(name = "product_id_sequence", sequenceName = "product_id_sequence")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "product_id_sequence")
-    private Integer id;
+    private Long id;
     @Column
     private String name;
     @Column
@@ -31,6 +32,7 @@ public class Product implements Serializable {
     private String sku;
     @Column
     private String category;
+    @NotNull
     @Column
     private BigDecimal price;
 

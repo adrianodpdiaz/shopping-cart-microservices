@@ -31,9 +31,9 @@ public class CustomerController {
     @Transactional
     @PostMapping
     public ResponseEntity<Void> registerCustomer(@Valid @RequestBody RegisterCustomerInbound registerCustomerInbound) {
-        Integer customerId = customerService.registerCustomer(registerCustomerInbound);
+        Long customerId = customerService.registerCustomer(registerCustomerInbound);
         log.info("registered customer {}", customerId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Operation(
@@ -41,7 +41,7 @@ public class CustomerController {
             description = "Get endpoint to get a customer's information."
     )
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Integer id) {
+    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Long id) {
         CustomerDTO customer = customerService.getCustomer(id);
         log.info("retrieved customer {}", id);
         return new ResponseEntity<>(customer, HttpStatus.OK);

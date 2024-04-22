@@ -17,13 +17,13 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
-    public Integer registerCustomer(RegisterCustomerInbound registerCustomerInbound) {
+    public Long registerCustomer(RegisterCustomerInbound registerCustomerInbound) {
         Customer customer = customerMapper.requestToEntity(registerCustomerInbound);
         customerRepository.saveAndFlush(customer);
         return customer.getId();
     }
 
-    public CustomerDTO getCustomer(Integer id) {
+    public CustomerDTO getCustomer(Long id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         String.format("Register not found for customer with id: %d", id)));

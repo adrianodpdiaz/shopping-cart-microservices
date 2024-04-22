@@ -1,4 +1,4 @@
-package com.adpd.product.exception.handler;
+package com.adpd.cart.exception.handler;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

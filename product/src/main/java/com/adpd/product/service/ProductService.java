@@ -17,9 +17,9 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public Integer registerProduct(RegisterProductInbound registerProductInbound) {
-        Integer maxId = productRepository.findMaxIdByCategory(registerProductInbound.getCategory())
-                .map(Product::getId).orElse(0);
+    public Long registerProduct(RegisterProductInbound registerProductInbound) {
+        Long maxId = productRepository.findMaxIdByCategory(registerProductInbound.getCategory())
+                .map(Product::getId).orElse(0L);
         String sku = registerProductInbound.getCategory().substring(0, 2).toUpperCase() +
                 "2267T" + ((maxId == 0) ? 1 : maxId);
 
@@ -30,7 +30,7 @@ public class ProductService {
         return product.getId();
     }
 
-    public ProductDTO getProduct(Integer id) {
+    public ProductDTO getProduct(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         String.format("Register not found for product with id: %d", id)));
