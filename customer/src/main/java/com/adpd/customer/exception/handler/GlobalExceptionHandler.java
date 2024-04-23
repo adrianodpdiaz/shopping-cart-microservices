@@ -3,6 +3,7 @@ package com.adpd.customer.exception.handler;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -40,6 +41,13 @@ public class GlobalExceptionHandler {
                 .toList();
 
         body.put(ERRORS, errors);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    protected ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        Map<String, String> body = new HashMap<>();
+        body.put(ERRORS, "Unique constraint validation error");
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 }

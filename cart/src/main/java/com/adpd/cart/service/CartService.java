@@ -25,15 +25,7 @@ public class CartService {
 
         Cart cart = cartMapper.requestToEntity(createCartInbound);
         cart.getItems().forEach(item -> item.setCart(cart));
-        try {
-            cartRepository.saveAndFlush(cart);
-        } catch (Exception ex) {
-            if(ex.getLocalizedMessage().contains("duplicate key value")) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        "Constraint validation error, productId must be unique");
-            }
-            throw ex;
-        }
+        cartRepository.saveAndFlush(cart);
 
         return cart.getId();
     }
