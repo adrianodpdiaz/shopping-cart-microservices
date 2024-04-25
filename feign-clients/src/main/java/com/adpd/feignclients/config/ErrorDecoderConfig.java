@@ -1,14 +1,14 @@
-package com.adpd.feignclients.customer;
+package com.adpd.feignclients.config;
 
 import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CustomerClientConfig {
+public class ErrorDecoderConfig {
 
     @Bean
     public ErrorDecoder errorDecoder() {
-        return new CustomerClientErrorDecoder();
+        return new ClientErrorDecoder();
     }
 }

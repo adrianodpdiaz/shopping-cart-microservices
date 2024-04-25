@@ -16,6 +16,7 @@
         <module>eureka-server</module>
         <module>feign-clients</module>
         <module>api-gateway</module>
+        <module>notification</module>
     </modules>
 
 
@@ -39,6 +40,7 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <postgresql.version>42.7.3</postgresql.version>
         <h2.version>2.2.224</h2.version>
+        <eureka-version>4.0.4</eureka-version>
 
         <hibernate-jcache.version>6.4.4.Final</hibernate-jcache.version>
         <ehcache.version>3.10.8</ehcache.version>
@@ -109,6 +111,28 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc.version}</version>
+            </dependency>
+
+            <!-- eureka version 4.1.1. throws an error when unregistering client -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+                <version>${eureka-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+                <version>${eureka-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-netflix-eureka-server</artifactId>
+                <version>${eureka-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-netflix-eureka-client</artifactId>
+                <version>${eureka-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

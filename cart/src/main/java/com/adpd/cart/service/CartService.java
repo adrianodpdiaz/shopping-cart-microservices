@@ -5,7 +5,7 @@ import com.adpd.cart.mapping.CartMapper;
 import com.adpd.cart.repository.CartRepository;
 import com.adpd.cart.resource.inbound.CreateCartInbound;
 import com.adpd.cart.resource.outbound.CartDTO;
-import com.adpd.feignclients.customer.CustomerClient;
+import com.adpd.feignclients.customer.client.CustomerClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
