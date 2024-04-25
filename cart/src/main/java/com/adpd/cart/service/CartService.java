@@ -3,8 +3,8 @@ package com.adpd.cart.service;
 import com.adpd.cart.entity.Cart;
 import com.adpd.cart.mapping.CartMapper;
 import com.adpd.cart.repository.CartRepository;
-import com.adpd.cart.resource.inbound.CreateCartInbound;
-import com.adpd.cart.resource.outbound.CartDTO;
+import com.adpd.cart.resource.form.CreateCartForm;
+import com.adpd.cart.resource.dto.CartDTO;
 import com.adpd.feignclients.customer.client.CustomerClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,11 @@ public class CartService {
     private final CartMapper cartMapper;
     private final CustomerClient customerClient;
 
-    public Long createCart(CreateCartInbound createCartInbound) {
+    public Long createCart(CreateCartForm createCartForm) {
         // validate customer
-        customerClient.getCustomer(createCartInbound.getCustomerId());
+        customerClient.getCustomer(createCartForm.getCustomerId());
 
-        Cart cart = cartMapper.requestToEntity(createCartInbound);
+        Cart cart = cartMapper.requestToEntity(createCartForm);
         cart.getItems().forEach(item -> item.setCart(cart));
         cartRepository.saveAndFlush(cart);
 

@@ -1,4 +1,4 @@
-package com.adpd.customer.resource.inbound;
+package com.adpd.customer.resource.form;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
-public class RegisterCustomerInbound {
+public class RegisterCustomerForm {
 
     @NotEmpty(message = "first name is required")
     private String firstName;

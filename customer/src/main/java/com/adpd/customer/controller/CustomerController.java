@@ -1,6 +1,6 @@
 package com.adpd.customer.controller;
 
-import com.adpd.customer.resource.inbound.RegisterCustomerInbound;
+import com.adpd.customer.resource.form.RegisterCustomerForm;
 import com.adpd.customer.resource.outbound.CustomerDTO;
 import com.adpd.customer.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +30,9 @@ public class CustomerController {
             description = "Post endpoint to register a new customer."
     )
     @Transactional
-    @PostMapping
-    public ResponseEntity<Void> registerCustomer(@Valid @RequestBody RegisterCustomerInbound registerCustomerInbound) {
-        Long customerId = customerService.registerCustomer(registerCustomerInbound);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> registerCustomer(@Valid @RequestBody RegisterCustomerForm registerCustomerForm) {
+        Long customerId = customerService.registerCustomer(registerCustomerForm);
         log.info("registered customer {}", customerId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -40,7 +41,7 @@ public class CustomerController {
             summary = "Get customer by id",
             description = "Get endpoint to get a customer's information."
     )
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Long id) {
         CustomerDTO customer = customerService.getCustomer(id);
         log.info("retrieved customer {}", id);

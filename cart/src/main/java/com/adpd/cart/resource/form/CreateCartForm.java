@@ -1,4 +1,4 @@
-package com.adpd.cart.resource.inbound;
+package com.adpd.cart.resource.form;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -12,12 +12,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateCartInbound {
+public class CreateCartForm {
 
     @NotNull(message = "customerId is required")
     @Positive(message = "customerId must be positive")
     private Long customerId;
     @Valid
-    private List<CartItemInbound> items;
+    private List<CartItemForm> items;
 
 }

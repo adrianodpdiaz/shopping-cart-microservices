@@ -1,4 +1,4 @@
-package com.adpd.cart.resource.inbound;
+package com.adpd.cart.resource.form;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CartItemInbound {
+public class CartItemForm {
 
     @NotNull(message = "productId is required")
     @Positive(message = "productId must be positive")

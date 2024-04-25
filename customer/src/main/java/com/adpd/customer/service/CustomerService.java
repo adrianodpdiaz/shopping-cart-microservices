@@ -2,7 +2,7 @@ package com.adpd.customer.service;
 
 import com.adpd.customer.mapping.CustomerMapper;
 import com.adpd.customer.resource.outbound.CustomerDTO;
-import com.adpd.customer.resource.inbound.RegisterCustomerInbound;
+import com.adpd.customer.resource.form.RegisterCustomerForm;
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.repository.CustomerRepository;
 import com.adpd.feignclients.notification.client.NotificationClient;
@@ -22,8 +22,8 @@ public class CustomerService {
     private final CustomerMapper customerMapper;
     private final NotificationClient notificationClient;
 
-    public Long registerCustomer(RegisterCustomerInbound registerCustomerInbound) {
-        Customer customer = customerMapper.requestToEntity(registerCustomerInbound);
+    public Long registerCustomer(RegisterCustomerForm registerCustomerForm) {
+        Customer customer = customerMapper.requestToEntity(registerCustomerForm);
         customerRepository.saveAndFlush(customer);
 
         SendNotificationForm sendNotificationForm = new SendNotificationForm();

@@ -1,7 +1,7 @@
 package com.adpd.product.controller;
 
-import com.adpd.product.resource.outbound.ProductDTO;
-import com.adpd.product.resource.inbound.RegisterProductInbound;
+import com.adpd.product.resource.dto.ProductDTO;
+import com.adpd.product.resource.form.RegisterProductForm;
 import com.adpd.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,9 @@ public class ProductController {
                     "+ a sequence increasing identifier according to the number of items registered."
     )
     @Transactional
-    @PostMapping
-    public ResponseEntity<Void> registerProduct(@Valid @RequestBody RegisterProductInbound registerProductInbound) {
-        Long productId = productService.registerProduct(registerProductInbound);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> registerProduct(@Valid @RequestBody RegisterProductForm registerProductForm) {
+        Long productId = productService.registerProduct(registerProductForm);
         log.info("registered product {}", productId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -43,7 +44,7 @@ public class ProductController {
             summary = "Get product by id",
             description = "Get endpoint to get a product's information."
     )
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDTO> getProduct(@PathVariable("id") Long id) {
         ProductDTO productDTO = productService.getProduct(id);
         log.info("retrieved product {}", id);

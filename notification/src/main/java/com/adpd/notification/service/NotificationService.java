@@ -14,8 +14,9 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
     private final NotificationMapper notificationMapper;
 
-    public void send(SendNotificationForm sendNotificationForm) {
+    public Long send(SendNotificationForm sendNotificationForm) {
         Notification notification = notificationMapper.requestToEntity(sendNotificationForm);
-        notificationRepository.saveAndFlush(notification);
+        notificationRepository.save(notification);
+        return notification.getToCustomerId();
     }
 }

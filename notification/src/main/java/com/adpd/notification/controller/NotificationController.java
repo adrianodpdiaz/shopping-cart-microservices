@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +27,9 @@ public class NotificationController {
             description = "Post endpoint to a notification."
     )
     @Transactional
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void send(@Valid @RequestBody SendNotificationForm sendNotificationForm) {
-        notificationService.send(sendNotificationForm);
-        log.info("notification sent {}", sendNotificationForm);
+        Long customerId = notificationService.send(sendNotificationForm);
+        log.info("notification sent to customer {}", customerId);
     }
 }
