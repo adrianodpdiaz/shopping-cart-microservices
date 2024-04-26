@@ -17,6 +17,7 @@
         <module>feign-clients</module>
         <module>api-gateway</module>
         <module>notification</module>
+        <module>amqp</module>
     </modules>
 
 

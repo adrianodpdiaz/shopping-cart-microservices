@@ -1,11 +1,12 @@
 package com.adpd.customer.service;
 
+import com.adpd.amqp.constants.ExchangeQueueConstants;
+import com.adpd.amqp.producer.RabbitMQMessageProducer;
 import com.adpd.customer.mapping.CustomerMapper;
 import com.adpd.customer.resource.outbound.CustomerDTO;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.repository.CustomerRepository;
-import com.adpd.feignclients.notification.client.NotificationClient;
 import com.adpd.feignclients.notification.resource.form.SendNotificationForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
-    private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public Long registerCustomer(RegisterCustomerForm registerCustomerForm) {
         Customer customer = customerMapper.requestToEntity(registerCustomerForm);
@@ -31,7 +32,9 @@ public class CustomerService {
         sendNotificationForm.setToCustomerEmail(customer.getEmail());
         sendNotificationForm.setSender(NOTIFICATION_SENDER);
         sendNotificationForm.setMessage("Customer Registered.");
-        notificationClient.send(sendNotificationForm);
+
+        rabbitMQMessageProducer.publish(ExchangeQueueConstants.INTERNAL_EXCHANGE,
+                ExchangeQueueConstants.INTERNAL_NOTIFICATION_ROUTING_KEY, sendNotificationForm);
 
         return customer.getId();
     }

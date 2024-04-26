@@ -1,4 +1,4 @@
-package com.adpd;
+package com.adpd.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

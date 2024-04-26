@@ -61,6 +61,18 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--  AMQP  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.adpd</groupId>
+            <artifactId>amqp</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
