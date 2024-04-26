@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Getter
 @Configuration
-public class NotificationConfig {
+public class NotificationRabbitMQConfig {
 
     @Bean
     public TopicExchange internalTopicExchange() {

@@ -8,13 +8,9 @@
         <artifactId>micros</artifactId>
         <version>${revision}</version>
     </parent>
-
+    <packaging>jar</packaging>
     <artifactId>cart</artifactId>
 
-    <properties>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -88,4 +84,14 @@
             <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

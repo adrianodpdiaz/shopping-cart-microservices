@@ -27,7 +27,7 @@ class ProductTest {
         product.setPrice(new BigDecimal("9.99"));
 
         productRepository.save(product);
-        Integer id = product.getId();
+        Long id = product.getId();
         Product savedProduct = productRepository.findById(id).orElseThrow();
 
         assertEquals(id, savedProduct.getId());

@@ -29,7 +29,7 @@ class CustomerTest {
         customer.setBirthDate(birthDate);
 
         customerRepository.save(customer);
-        Integer id = customer.getId();
+        Long id = customer.getId();
         Customer savedCustomer = customerRepository.findById(id).orElseThrow();
 
         assertEquals(id, savedCustomer.getId());
