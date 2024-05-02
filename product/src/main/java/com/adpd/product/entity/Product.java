@@ -32,7 +32,7 @@ public class Product implements Serializable {
     private String sku;
     @Column
     private String category;
-    @NotNull
+    @NotNull(message = "price column must not be null")
     @Column
     private BigDecimal price;
 

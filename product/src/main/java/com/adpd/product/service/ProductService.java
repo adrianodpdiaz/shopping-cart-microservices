@@ -18,10 +18,10 @@ public class ProductService {
     private final ProductMapper productMapper;
 
     public Long registerProduct(RegisterProductForm registerProductForm) {
-        Long maxId = productRepository.findMaxIdByCategory(registerProductForm.getCategory())
+        long maxId = productRepository.findMaxIdByCategory(registerProductForm.getCategory())
                 .map(Product::getId).orElse(0L);
         String sku = registerProductForm.getCategory().substring(0, 2).toUpperCase() +
-                "2267T" + ((maxId == 0) ? 1 : maxId);
+                "2267T" + ((maxId == 0) ? 1 : maxId + 1);
 
         Product product = productMapper.requestToEntity(registerProductForm);
         product.setSku(sku);
