@@ -30,6 +30,7 @@
 
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <jib-plugin.version>3.4.2</jib-plugin.version>
 
         <spring-boot.version>3.2.4</spring-boot.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
@@ -45,6 +46,8 @@
 
         <hibernate-jcache.version>6.4.4.Final</hibernate-jcache.version>
         <ehcache.version>3.10.8</ehcache.version>
+
+        <image>adrianodpdiaz/${project.artifactId}:${project.version}</image>
     </properties>
 
 
@@ -197,8 +200,42 @@
                         </annotationProcessorPaths>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>${jib-plugin.version}</version>
+                    <configuration>
+                        <from>
+                            <image>openjdk:17-oracle</image>
+                            <platforms>
+                                <platform>
+                                    <architecture>arm64</architecture>
+                                    <os>linux</os>
+                                </platform>
+                                <platform>
+                                    <architecture>amd64</architecture>
+                                    <os>linux</os>
+                                </platform>
+                            </platforms>
+                        </from>
+                        <to>
+                            <tags>
+                                <tag>latest</tag>
+                            </tags>
+                        </to>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
+
 
         <plugins>
             <plugin>
