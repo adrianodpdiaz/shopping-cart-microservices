@@ -7,6 +7,8 @@ import com.adpd.notification.resource.form.SendNotificationForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class NotificationService {
@@ -16,6 +18,7 @@ public class NotificationService {
 
     public Long send(SendNotificationForm sendNotificationForm) {
         Notification notification = notificationMapper.requestToEntity(sendNotificationForm);
+        notification.setSentAt(LocalDateTime.now());
         notificationRepository.save(notification);
         return notification.getToCustomerId();
     }

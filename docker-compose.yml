@@ -29,6 +29,33 @@ services:
       - postgres
     restart: unless-stopped
 
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: adrianodpdiaz
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb:/data
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: adrianodpdiaz
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: password
+    ports:
+      - 8081:8081
+    depends_on:
+      -  "mongo"
+
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
@@ -49,3 +76,4 @@ networks:
 volumes:
   postgres:
   pgadmin:
+  mongodb: {}

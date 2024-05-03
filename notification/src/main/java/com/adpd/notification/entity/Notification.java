@@ -1,38 +1,34 @@
 package com.adpd.notification.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
-@Table(name = "notification")
+@Document(collection = "notification")
 public class Notification implements Serializable {
 
     @Id
-    @Column
-    @SequenceGenerator(name = "notification_id_sequence", sequenceName = "notification_id_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "notification_id_sequence")
-    private Long id;
-    @Column(name = "to_customer_id")
+    private String id;
+    @Field(name = "to_customer_id")
     private Long toCustomerId;
-    @Column(name = "to_customer_email")
+    @Field(name = "to_customer_email")
     private String toCustomerEmail;
     @NotNull
     private String sender;
     @NotNull
     private String message;
-    @CreationTimestamp
-    @Column(name = "sent_at")
+    @Field(name = "sent_at")
     private LocalDateTime sentAt;
 
     @Override
