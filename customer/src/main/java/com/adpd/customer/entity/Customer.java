@@ -24,11 +24,13 @@ public class Customer implements Serializable {
     @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer_id_sequence")
     private Long id;
+    @NotNull
     @Column
     private String firstName;
+    @NotNull
     @Column
     private String lastName;
-    @NotNull
+    @NotNull(message = "e-mail column cannot be null")
     @Column(unique = true)
     private String email;
     @Column(name = "birth_date")
