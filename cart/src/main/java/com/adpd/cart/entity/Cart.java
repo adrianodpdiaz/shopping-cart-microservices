@@ -1,10 +1,12 @@
 package com.adpd.cart.entity;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -26,11 +28,17 @@ public class Cart implements Serializable {
     @Column(name = "customer_id")
     private Long customerId;
     @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy="cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Item> items;
+
+    @PostConstruct
+    void a() {
+        setCreatedAt(createdAt);
+    }
 
     @Override
     public boolean equals(Object o) {

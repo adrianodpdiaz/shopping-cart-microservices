@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-import static com.adpd.customer.util.LocalDateTypeAdapter.LOCAL_DATE_FORMATTER;
-
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CustomerTestUtil {
 
