@@ -1,8 +1,8 @@
 package com.adpd.product.util;
 
 import com.adpd.product.entity.Product;
-import com.adpd.product.resource.dto.ProductDTO;
 import com.adpd.product.resource.form.RegisterProductForm;
+import com.adpd.feignclients.resource.dto.ProductDTO;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

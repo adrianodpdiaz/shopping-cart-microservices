@@ -15,7 +15,7 @@ public class RouterValidator {
 
     public static final Map<String, List<HttpMethod>> unsecuredEndpoints = Map.of(
         "/api/v1/auth/authenticate", List.of(GET, POST),
-        "/api/v1/customers", List.of(POST)
+        "/api/v1/users", List.of(POST)
     );
 
     public Predicate<ServerHttpRequest> isSecured = request -> {

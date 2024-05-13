@@ -5,7 +5,7 @@ import com.adpd.cart.mapping.CartMapperImpl;
 import com.adpd.cart.repository.CartRepository;
 import com.adpd.cart.resource.dto.CartDTO;
 import com.adpd.cart.resource.form.CreateCartForm;
-import com.adpd.feignclients.customer.client.CustomerClient;
+import com.adpd.feignclients.client.CustomerClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

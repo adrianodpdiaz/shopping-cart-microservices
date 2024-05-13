@@ -20,9 +20,6 @@ public class GatewayConfig {
             .route("customer", r -> r.path("/api/v1/customers/**")
                 .filters(f -> f.filter(filter))
                 .uri("lb://CUSTOMER"))
-            .route("customer", r -> r.path("/api/v1/users/**")
-                .filters(f -> f.filter(filter))
-                .uri("lb://CUSTOMER"))
 
             .route("product", r -> r.path("/api/v1/products/**")
                 .filters(f -> f.filter(filter))
@@ -39,6 +36,10 @@ public class GatewayConfig {
             .route("auth", r -> r.path("/api/v1/auth/**")
                 .filters(f -> f.filter(filter))
                 .uri("lb://AUTH"))
+            .route("user", r -> r.path("/api/v1/users/**")
+                .filters(f -> f.filter(filter))
+                .uri("lb://AUTH"))
+
             .build();
     }
 }

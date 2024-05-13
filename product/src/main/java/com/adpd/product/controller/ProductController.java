@@ -1,6 +1,6 @@
 package com.adpd.product.controller;
 
-import com.adpd.product.resource.dto.ProductDTO;
+import com.adpd.feignclients.resource.dto.ProductDTO;
 import com.adpd.product.resource.form.RegisterProductForm;
 import com.adpd.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,11 +26,11 @@ public class ProductController {
     private final ProductService productService;
 
     @Operation(
-            summary = "Register new product",
-            description = "Post endpoint to register a new product.\n" +
-                    "When providing the required payload information, the product's SKU (Stock Keeping Units) number " +
-                    "will be generated with the pattern: First two characters from category in uppercase + \"2267T\" " +
-                    "+ a sequence increasing identifier according to the number of items registered."
+        summary = "Register new product",
+        description = "Post endpoint to register a new product.\n" +
+            "When providing the required payload information, the product's SKU (Stock Keeping Units) number " +
+            "will be generated with the pattern: First two characters from category in uppercase + \"2267T\" " +
+            "+ a sequence increasing identifier according to the number of items registered."
     )
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -41,8 +41,8 @@ public class ProductController {
     }
 
     @Operation(
-            summary = "Get product by id",
-            description = "Get endpoint to get a product's information."
+        summary = "Get product by id",
+        description = "Get endpoint to get a product's information."
     )
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDTO> getProduct(@PathVariable("id") Long id) {

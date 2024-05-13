@@ -2,7 +2,6 @@ package com.adpd.auth.controller;
 
 import com.adpd.auth.resource.form.CreateUserForm;
 import com.adpd.auth.service.UserService;
-import com.adpd.feignclients.customer.resource.dto.UserDetailsDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Validated
 @RestController
-@Tag(name = "Customer")
+@Tag(name = "User")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -35,16 +34,5 @@ public class UserController {
         Long userId = userService.createUser(createUserForm);
         log.info("registered user {}", userId);
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @Operation(
-        summary = "Get user by e-mail",
-        description = "Get endpoint to get a user information filtered by its e-mail."
-    )
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDetailsDTO> getUser(@RequestParam("email") String email) {
-        UserDetailsDTO userDetails = userService.getUser(email);
-        log.info("retrieved user {}", email);
-        return new ResponseEntity<>(userDetails, HttpStatus.OK);
     }
 }

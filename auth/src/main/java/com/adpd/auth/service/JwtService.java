@@ -1,6 +1,7 @@
 package com.adpd.auth.service;
 
-import com.adpd.feignclients.customer.resource.dto.UserDetailsDTO;
+import com.adpd.auth.resource.dto.UserDetailsDTO;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -22,26 +23,25 @@ public class JwtService {
     private String tokenExpirationSeconds;
 
 
-    private SecretKey getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
-
     public String generate(UserDetailsDTO userDetailsDTO, String type) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userDetailsDTO.getRole());
         return doGenerateToken(claims, userDetailsDTO.getEmail(), type);
     }
 
+    public Date getTokenExpiration(String token) {
+        return this.getAllClaimsFromToken(token).getExpiration();
+    }
+
     private String doGenerateToken(Map<String, Object> extraClaims, String username, String type) {
-        long expirationTimeLong;
+        long expirationTime;
         if ("ACCESS".equals(type)) {
-            expirationTimeLong = Long.parseLong(tokenExpirationSeconds) * 1000;
+            expirationTime = Long.parseLong(tokenExpirationSeconds) * 1000;
         } else {
-            expirationTimeLong = Long.parseLong(tokenExpirationSeconds) * 1000 * 5;
+            expirationTime = Long.parseLong(tokenExpirationSeconds) * 1000 * 5;
         }
         final Date createdDate = new Date();
-        final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong);
+        final Date expirationDate = new Date(createdDate.getTime() + expirationTime);
 
         return Jwts
                 .builder()
@@ -52,5 +52,19 @@ public class JwtService {
                 .and()
                 .signWith(getSigningKey(), Jwts.SIG.HS256)
                 .compact();
+    }
+
+    private SecretKey getSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public Claims getAllClaimsFromToken(String token) {
+        return Jwts
+                .parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }

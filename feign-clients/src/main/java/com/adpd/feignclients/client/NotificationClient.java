@@ -1,7 +1,7 @@
-package com.adpd.feignclients.notification.client;
+package com.adpd.feignclients.client;
 
 import com.adpd.feignclients.config.ErrorDecoderConfig;
-import com.adpd.feignclients.notification.resource.form.SendNotificationForm;
+import com.adpd.feignclients.resource.form.SendNotificationForm;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;

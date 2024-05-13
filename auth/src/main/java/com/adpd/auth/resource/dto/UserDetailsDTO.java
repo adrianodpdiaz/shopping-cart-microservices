@@ -1,6 +1,6 @@
-package com.adpd.feignclients.customer.resource.dto;
+package com.adpd.auth.resource.dto;
 
-import com.adpd.feignclients.customer.resource.Role;
+import com.adpd.feignclients.resource.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;

@@ -7,7 +7,7 @@ import com.adpd.customer.resource.dto.CustomerDTO;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.repository.CustomerRepository;
-import com.adpd.feignclients.notification.resource.form.SendNotificationForm;
+import com.adpd.feignclients.resource.form.SendNotificationForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

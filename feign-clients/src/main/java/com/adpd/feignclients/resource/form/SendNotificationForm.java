@@ -1,4 +1,4 @@
-package com.adpd.feignclients.notification.resource.form;
+package com.adpd.feignclients.resource.form;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

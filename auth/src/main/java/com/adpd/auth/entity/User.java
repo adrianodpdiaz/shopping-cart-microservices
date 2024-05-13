@@ -1,7 +1,7 @@
 package com.adpd.auth.entity;
 
 import com.adpd.auth.annotation.ValidPassword;
-import com.adpd.feignclients.customer.resource.Role;
+import com.adpd.feignclients.resource.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

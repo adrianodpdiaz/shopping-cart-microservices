@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(AuthenticationException.class)
-    protected ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex) {
+    protected ResponseEntity<Object> handleAuthenticationException()  {
         Map<String, String> body = new HashMap<>();
         String authFailed = "Authentication failed";
 

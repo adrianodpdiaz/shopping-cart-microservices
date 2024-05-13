@@ -1,4 +1,4 @@
-package com.adpd.feignclients.customer.resource.dto;
+package com.adpd.feignclients.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
