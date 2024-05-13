@@ -1,7 +1,7 @@
 package com.adpd.customer.controller;
 
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.outbound.CustomerDTO;
+import com.adpd.customer.resource.dto.CustomerDTO;
 import com.adpd.customer.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -3,7 +3,7 @@ package com.adpd.customer.service;
 import com.adpd.amqp.constants.ExchangeQueueConstants;
 import com.adpd.amqp.producer.RabbitMQMessageProducer;
 import com.adpd.customer.mapping.CustomerMapper;
-import com.adpd.customer.resource.outbound.CustomerDTO;
+import com.adpd.customer.resource.dto.CustomerDTO;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.repository.CustomerRepository;

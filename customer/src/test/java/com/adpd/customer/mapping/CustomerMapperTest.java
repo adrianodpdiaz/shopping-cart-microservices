@@ -2,7 +2,7 @@ package com.adpd.customer.mapping;
 
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.outbound.CustomerDTO;
+import com.adpd.customer.resource.dto.CustomerDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

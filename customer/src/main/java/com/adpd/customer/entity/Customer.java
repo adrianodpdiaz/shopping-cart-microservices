@@ -12,8 +12,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
+@Entity
 @Table(name = "customer")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "customerCache")
@@ -21,8 +21,6 @@ public class Customer implements Serializable {
 
     @Id
     @Column
-    @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer_id_sequence")
     private Long id;
     @NotNull
     @Column

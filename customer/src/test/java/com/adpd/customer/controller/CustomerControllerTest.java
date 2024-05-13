@@ -1,7 +1,7 @@
 package com.adpd.customer.controller;
 
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.outbound.CustomerDTO;
+import com.adpd.customer.resource.dto.CustomerDTO;
 import com.adpd.customer.service.CustomerService;
 import com.adpd.customer.util.LocalDateTypeAdapter;
 import com.google.gson.Gson;

@@ -5,7 +5,7 @@ import com.adpd.customer.entity.Customer;
 import com.adpd.customer.mapping.CustomerMapperImpl;
 import com.adpd.customer.repository.CustomerRepository;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.outbound.CustomerDTO;
+import com.adpd.customer.resource.dto.CustomerDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,6 +43,7 @@ class CustomerServiceTest {
         when(customerRepository.saveAndFlush(customer)).thenReturn(customer);
 
         Long customerId = customerService.registerCustomer(registerCustomerForm);
+
         assertEquals(registerCustomerForm.getFirstName(), customer.getFirstName());
         assertEquals(registerCustomerForm.getLastName(), customer.getLastName());
         assertEquals(registerCustomerForm.getEmail(), customer.getEmail());

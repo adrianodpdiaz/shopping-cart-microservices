@@ -35,7 +35,7 @@ class CustomerTest {
 
     @Test
     void shouldSaveAndFindCustomer() {
-        Customer mockCustomer = mockCustomer(null);
+        Customer mockCustomer = mockCustomer(1L);
 
         customerRepository.save(mockCustomer);
         Long id = mockCustomer.getId();
@@ -49,7 +49,7 @@ class CustomerTest {
     }
 
     @Test
-    void shouldInvalidateEmailNotNull() {
+    void shouldInvalidateNullEmail() {
         Customer customer = mockCustomer(null);
         customer.setEmail(null);
 

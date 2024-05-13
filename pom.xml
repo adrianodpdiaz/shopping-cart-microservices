@@ -13,11 +13,12 @@
         <module>customer</module>
         <module>product</module>
         <module>cart</module>
-        <module>eureka-server</module>
-        <module>feign-clients</module>
-        <module>api-gateway</module>
         <module>notification</module>
+        <module>eureka-server</module>
+        <module>api-gateway</module>
+        <module>feign-clients</module>
         <module>amqp</module>
+        <module>auth</module>
     </modules>
 
 
@@ -36,13 +37,17 @@
         <spring-cloud.version>2023.0.1</spring-cloud.version>
         <springdoc.version>2.5.0</springdoc.version>
         <micrometer-tracing.version>1.2.5</micrometer-tracing.version>
+        <eureka-version>4.0.4</eureka-version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
 
+        <passay.version>1.6.4</passay.version>
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+
+        <jjwt.version>0.12.5</jjwt.version>
+
         <postgresql.version>42.7.3</postgresql.version>
         <h2.version>2.2.224</h2.version>
-        <eureka-version>4.0.4</eureka-version>
 
         <hibernate-jcache.version>6.4.4.Final</hibernate-jcache.version>
         <ehcache.version>3.10.8</ehcache.version>
@@ -137,6 +142,28 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-netflix-eureka-client</artifactId>
                 <version>${eureka-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.passay</groupId>
+                <artifactId>passay</artifactId>
+                <version>${passay.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
