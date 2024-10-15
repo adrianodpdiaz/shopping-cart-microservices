@@ -26,10 +26,10 @@ public class Item implements Serializable {
     @SequenceGenerator(name = "item_id_sequence", sequenceName = "item_id_sequence")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "item_id_sequence")
     private Long id;
-    @NotNull
+    @NotNull(message = "product_id column must not be null")
     @Column(name = "product_id")
     private Long productId;
-    @NotNull
+    @NotNull(message = "unit_price column must not be null")
     @Column(name = "unit_price", columnDefinition = "decimal(19,2)")
     private BigDecimal unitPrice;
     @Column(columnDefinition = "integer default 1")

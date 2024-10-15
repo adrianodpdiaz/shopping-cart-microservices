@@ -1,6 +1,8 @@
 package com.adpd.cart.mapping;
 
 import com.adpd.cart.entity.Cart;
+import com.adpd.cart.entity.Item;
+import com.adpd.cart.resource.form.CartItemForm;
 import com.adpd.cart.resource.form.CreateCartForm;
 import com.adpd.cart.resource.dto.CartDTO;
 import org.mapstruct.Mapper;
@@ -11,5 +13,7 @@ public interface CartMapper {
     CartDTO toDTO(Cart customer);
 
     Cart requestToEntity(CreateCartForm form);
+
+    Item toItem(CartItemForm cartItemForm);
 
 }
