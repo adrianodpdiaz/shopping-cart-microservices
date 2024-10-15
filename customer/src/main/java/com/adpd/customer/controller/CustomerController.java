@@ -1,7 +1,7 @@
 package com.adpd.customer.controller;
 
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.dto.CustomerDTO;
+import com.adpd.feignclients.resource.dto.CustomerDTO;
 import com.adpd.customer.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,20 +26,22 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @Operation(
-            summary = "Register new customer",
-            description = "Post endpoint to register a new customer."
+        summary = "Register new customer",
+        description = "Post endpoint to register a new customer."
     )
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> registerCustomer(@Valid @RequestBody RegisterCustomerForm registerCustomerForm) {
-        Long customerId = customerService.registerCustomer(registerCustomerForm);
+    public ResponseEntity<Void> registerCustomer(
+            @Valid @RequestBody RegisterCustomerForm registerCustomerForm,
+            @RequestHeader("X-Auth-Username") String userEmail) {
+        Long customerId = customerService.registerCustomer(registerCustomerForm, userEmail);
         log.info("registered customer {}", customerId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Operation(
-            summary = "Get customer by id",
-            description = "Get endpoint to get a customer's information."
+        summary = "Get customer by id",
+        description = "Get endpoint to get a customer's information."
     )
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Long id) {

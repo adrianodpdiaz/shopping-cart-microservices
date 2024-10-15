@@ -6,6 +6,7 @@ import io.jsonwebtoken.Claims;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -18,7 +19,6 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class AuthenticationFilter implements GatewayFilter {
 
-    private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String AUTH_HEADER_MISSING = "Authorization header is missing";
     private static final String AUTH_HEADER_INVALID = "Authorization header is invalid";
     private static final String ROLE = "role";
@@ -40,6 +40,9 @@ public class AuthenticationFilter implements GatewayFilter {
                 return this.onError(exchange, AUTH_HEADER_INVALID, HttpStatus.UNAUTHORIZED);
 
             this.populateRequestWithHeaders(exchange, token);
+
+            String username = jwtUtil.extractUsernameFromToken(token);
+            exchange.getRequest().mutate().header("X-Auth-Username", username).build();
         }
         return chain.filter(exchange);
     }
@@ -51,11 +54,11 @@ public class AuthenticationFilter implements GatewayFilter {
     }
 
     private String getAuthHeader(ServerHttpRequest request) {
-        return request.getHeaders().getOrEmpty(AUTHORIZATION_HEADER).get(0);
+        return request.getHeaders().getOrEmpty(HttpHeaders.AUTHORIZATION).get(0);
     }
 
     private boolean isAuthMissing(ServerHttpRequest request) {
-        return !request.getHeaders().containsKey(AUTHORIZATION_HEADER);
+        return !request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION);
     }
 
     private void populateRequestWithHeaders(ServerWebExchange exchange, String token) {

@@ -3,7 +3,7 @@ package com.adpd.customer.service;
 import com.adpd.amqp.constants.ExchangeQueueConstants;
 import com.adpd.amqp.producer.RabbitMQMessageProducer;
 import com.adpd.customer.mapping.CustomerMapper;
-import com.adpd.customer.resource.dto.CustomerDTO;
+import com.adpd.feignclients.resource.dto.CustomerDTO;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.repository.CustomerRepository;
@@ -24,9 +24,13 @@ public class CustomerService {
     private final CustomerMapper customerMapper;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
-    public Long registerCustomer(RegisterCustomerForm registerCustomerForm) {
+    public Long registerCustomer(RegisterCustomerForm registerCustomerForm, String userEmail) {
         Customer customer = customerMapper.requestToEntity(registerCustomerForm);
         customerRepository.saveAndFlush(customer);
+
+        if (!registerCustomerForm.getEmail().equals(userEmail)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
 
         SendNotificationForm sendNotificationForm = new SendNotificationForm();
         sendNotificationForm.setToCustomerId(customer.getId());

@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:13
     environment:
       POSTGRES_USER: adrianodpdiaz
       POSTGRES_PASSWORD: password

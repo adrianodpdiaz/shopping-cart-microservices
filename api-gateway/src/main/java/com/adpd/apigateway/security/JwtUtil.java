@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.function.Function;
 
 @Component
 public class JwtUtil {
@@ -36,5 +37,14 @@ public class JwtUtil {
 
     public boolean isInvalid(String token) {
         return this.isTokenExpired(token);
+    }
+
+    public String extractUsernameFromToken(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final var claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
     }
 }

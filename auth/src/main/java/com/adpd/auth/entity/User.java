@@ -1,6 +1,5 @@
 package com.adpd.auth.entity;
 
-import com.adpd.auth.annotation.ValidPassword;
 import com.adpd.feignclients.resource.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -28,7 +27,6 @@ public class User implements Serializable {
     @NotNull(message = "e-mail column cannot be null")
     @Column(unique = true)
     private String email;
-    @ValidPassword
     @NotNull(message = "password column cannot be null")
     private String password;
     @Enumerated(EnumType.STRING)

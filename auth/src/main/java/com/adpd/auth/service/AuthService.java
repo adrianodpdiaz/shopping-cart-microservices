@@ -21,9 +21,9 @@ public class AuthService {
 
     public AuthenticationDTO authenticate(AuthenticateForm authenticateForm) throws AuthenticationException {
         UserDetailsDTO userDetailsDTO = userService.getUser(authenticateForm.getEmail());
-        authenticateForm.setPassword(passwordEncoder.encode(authenticateForm.getPassword()));
 
-        if(userDetailsDTO == null || !userDetailsDTO.getPassword().equals(authenticateForm.getPassword())) {
+        if(userDetailsDTO == null ||
+                !passwordEncoder.matches(authenticateForm.getPassword(), userDetailsDTO.getPassword())) {
             throw new AuthenticationException();
         }
 
