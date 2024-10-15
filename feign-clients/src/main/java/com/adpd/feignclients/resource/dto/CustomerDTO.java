@@ -12,12 +12,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"firstName", "lastName", "email", "birthDate"})
+@JsonPropertyOrder({"firstName", "lastName", "email", "taxId", "birthDate"})
 public class CustomerDTO {
 
     private String firstName;
     private String lastName;
     private String email;
+    private String taxId;
     private LocalDate birthDate;
 
 }

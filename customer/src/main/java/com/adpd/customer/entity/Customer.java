@@ -21,6 +21,8 @@ public class Customer implements Serializable {
 
     @Id
     @Column
+    @SequenceGenerator(name = "customer_info_id_sequence", sequenceName = "customer_info_id_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer_info_id_sequence")
     private Long id;
     @NotNull
     @Column
@@ -33,6 +35,8 @@ public class Customer implements Serializable {
     private String email;
     @Column(name = "birth_date")
     private LocalDate birthDate;
+    @Column(name = "tax_id")
+    private String taxId;
 
     @Override
     public boolean equals(Object o) {

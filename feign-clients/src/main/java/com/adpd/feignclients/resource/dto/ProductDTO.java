@@ -13,9 +13,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"name", "description", "SKU", "category", "price"})
+@JsonPropertyOrder({"id", "name", "description", "SKU", "category", "price"})
 public class ProductDTO {
 
+    private Long id;
     private String name;
     private String description;
     @JsonProperty("SKU")

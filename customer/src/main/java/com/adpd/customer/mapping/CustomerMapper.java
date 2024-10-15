@@ -2,7 +2,7 @@ package com.adpd.customer.mapping;
 
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.dto.CustomerDTO;
+import com.adpd.feignclients.resource.dto.CustomerDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

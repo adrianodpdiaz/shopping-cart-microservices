@@ -1,9 +1,9 @@
 package com.adpd.product.controller;
 
-import com.adpd.product.resource.dto.ProductDTO;
+import com.adpd.feignclients.resource.dto.ProductDTO;
 import com.adpd.product.resource.form.RegisterProductForm;
 import com.adpd.product.service.ProductService;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,15 +31,15 @@ class ProductControllerTest {
 
     @Inject
     private MockMvc mockMvc;
-    @Inject
-    private Gson gson;
     @MockBean
     private ProductService productService;
+    @Inject
+    private ObjectMapper objectMapper;
 
     @Test
     void shouldRegisterAProduct() throws Exception {
         RegisterProductForm registerProductForm = mockRegisterProductForm();
-        String payload = gson.toJson(registerProductForm);
+        String payload = objectMapper.writeValueAsString(registerProductForm);
 
         when(productService.registerProduct(registerProductForm)).thenReturn(1L);
 
@@ -68,7 +68,7 @@ class ProductControllerTest {
     @Test
     void testRegisterProductFormValidation() throws Exception {
         RegisterProductForm registerProductForm = new RegisterProductForm();
-        String payload = gson.toJson(registerProductForm);
+        String payload = objectMapper.writeValueAsString(registerProductForm);
 
         when(productService.registerProduct(registerProductForm)).thenReturn(1L);
 

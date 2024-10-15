@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -26,5 +27,8 @@ public class RegisterCustomerForm {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NotNull(message = "birth date is required")
     private LocalDate birthDate;
+    @NotEmpty
+    @Pattern(regexp = "\\d{11}", message = "taxId must contain 11 digits")
+    private String taxId;
 
 }

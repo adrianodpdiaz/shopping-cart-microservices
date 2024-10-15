@@ -1,7 +1,7 @@
 package com.adpd.product.mapping;
 
+import com.adpd.feignclients.resource.dto.ProductDTO;
 import com.adpd.product.entity.Product;
-import com.adpd.product.resource.dto.ProductDTO;
 import com.adpd.product.resource.form.RegisterProductForm;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

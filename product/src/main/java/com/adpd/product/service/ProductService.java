@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -19,7 +21,7 @@ public class ProductService {
 
     public Long registerProduct(RegisterProductForm registerProductForm) {
         long maxId = productRepository.findMaxIdByCategory(registerProductForm.getCategory())
-            .map(Product::getId).orElse(0L);
+            .orElse(0L);
         String sku = registerProductForm.getCategory().substring(0, 2).toUpperCase() +
             "2267T" + ((maxId == 0) ? 1 : maxId + 1);
 
@@ -28,6 +30,11 @@ public class ProductService {
         productRepository.saveAndFlush(product);
 
         return product.getId();
+    }
+
+    public List<ProductDTO> listProducts() {
+        List<Product> products = productRepository.findAll();
+        return productMapper.toDTOList(products);
     }
 
     public ProductDTO getProduct(Long id) {

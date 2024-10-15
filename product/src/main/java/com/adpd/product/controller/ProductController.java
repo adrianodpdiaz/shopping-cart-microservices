@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @Validated
 @RestController
@@ -38,6 +40,17 @@ public class ProductController {
         Long productId = productService.registerProduct(registerProductForm);
         log.info("registered product {}", productId);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @Operation(
+        summary = "List products",
+        description = "Get endpoint to get a list of all products."
+    )
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ProductDTO>> listProducts() {
+        List<ProductDTO> products = productService.listProducts();
+        log.info("retrieved product list.");
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @Operation(
