@@ -3,7 +3,7 @@
 
 The **Shopping Cart Management** is a distributed e-commerce cart management system in microservices architecture. The design emphasizes modularity, scalability, and performance while leveraging modern technologies and best practices. 🚀
 
-It enables users to add, update, view, and delete items from their shopping carts. It integrates seamlessly with other services in the architecture, such as the Product and Notification Services, to provide real-time cart updates, product information, and asynchronous notifications.
+It enables users to add, update, view, and delete items from their shopping carts, integrating with other services in the architecture, such as the Customer, Product and Notification Services, to provide customer and product information, and asynchronous notifications.
 
 ---
 
@@ -92,20 +92,21 @@ Before getting started, make sure you have the following installed and set up on
 5. **Access the Services**  
    All the service instances and ports will be available on Eureka (http://localhost:8761/).
 
-| Method        | URL                       | Description                                                                                                   |
-|---------------|---------------------------|---------------------------------------------------------------------------------------------------------------|
-| Eureka        | `http://localhost:8761/`  | Service registry for microservices, providing service discovery and management.                               |
-| PgAdmin       | `http://localhost:5050/`  | Web interface for managing PostgreSQL databases.                                                              |
-| Mongo Express | `http://localhost:8081/`  | Web-based admin interface for managing MongoDB databases.                                                     |
-| API Gateway   | `http://localhost:8084/`  | Gateway that routes requests to appropriate microservices, often including load balancing and authentication. |
-| Zipkin        | `http://localhost:9411/`  | Distributed tracing tool for monitoring and debugging performance bottlenecks.                                |
-| RabbitMQ      | `http://localhost:15672/` | Web-based management interface for RabbitMQ, for message queue management and monitoring.                     |
+| Method        | URL                                             | Description                                                                                                   |
+|---------------|-------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| Eureka        | `http://localhost:8761/`                        | Service registry for microservices, providing service discovery and management.                               |
+| PgAdmin       | `http://localhost:5050/`                        | Web interface for managing PostgreSQL databases.                                                              |
+| Mongo Express | `http://localhost:8081/`                        | Web-based admin interface for managing MongoDB databases.                                                     |
+| API Gateway   | `http://localhost:8084/`                        | Gateway that routes requests to appropriate microservices, often including load balancing and authentication. |
+| Zipkin        | `http://localhost:9411/`                        | Distributed tracing tool for monitoring and debugging performance bottlenecks.                                |
+| RabbitMQ      | `http://localhost:15672/`                       | Web-based management interface for RabbitMQ, for message queue management and monitoring.                     |
+| OpenApi Spec  | `http://localhost:<port>/swagger-ui/index.html` | Web interface for exploring and testing the API endpoints defined by the OpenAPI specification.               |
 
 ---
 
 ## 🔍 Request-Response Sequence and Endpoints
 
-<img src="./sequence_diagram.svg" alt="System architecture" style="width: 650px;">
+<img src="./sequence_diagram.svg" alt="System architecture" style="width: 750px;">
 
 ---
 Made with ❤️ by [`Adriano Diaz`](https://www.linkedin.com/in/adriano-diaz/) :bird:
