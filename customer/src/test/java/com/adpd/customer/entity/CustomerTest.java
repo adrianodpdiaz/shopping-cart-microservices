@@ -1,6 +1,7 @@
 package com.adpd.customer.entity;
 
 import com.adpd.customer.repository.CustomerRepository;
+import com.adpd.customer.util.CustomerTestParent;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -14,12 +15,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Set;
 
-import static com.adpd.customer.util.CustomerTestUtil.mockCustomer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @ExtendWith(MockitoExtension.class)
-class CustomerTest {
+class CustomerTest extends CustomerTestParent {
 
     private Validator validator;
 

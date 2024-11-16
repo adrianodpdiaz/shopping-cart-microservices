@@ -1,9 +1,10 @@
 package com.adpd.customer.controller;
 
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.dto.CustomerDTO;
 import com.adpd.customer.service.CustomerService;
+import com.adpd.customer.util.CustomerTestParent;
 import com.adpd.customer.util.LocalDateTypeAdapter;
+import com.adpd.feignclients.resource.dto.CustomerDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jakarta.inject.Inject;
@@ -18,8 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 
-import static com.adpd.customer.util.CustomerTestUtil.mockCustomerDTO;
-import static com.adpd.customer.util.CustomerTestUtil.mockRegisterCustomerForm;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -29,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(controllers = CustomerController.class)
-class CustomerControllerTest {
+class CustomerControllerTest extends CustomerTestParent {
 
     private static final String URL_CUSTOMER = "/api/v1/customers/1";
     private static final String URL_CUSTOMERS = "/api/v1/customers";
@@ -53,7 +52,7 @@ class CustomerControllerTest {
         RegisterCustomerForm registerCustomerForm = mockRegisterCustomerForm();
         String payload = gson.toJson(registerCustomerForm);
 
-        when(customerService.registerCustomer(any())).thenReturn(1L);
+        when(customerService.registerCustomer(any(), any())).thenReturn(1L);
 
         mockMvc.perform(post(URL_CUSTOMERS).content(payload).contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isCreated())
@@ -78,12 +77,13 @@ class CustomerControllerTest {
 
     @Test
     void testRegisterCustomerFormValidation() throws Exception {
+        String invalidEmail = "invalid.email@invalid";
         RegisterCustomerForm registerCustomerForm = new RegisterCustomerForm();
-        registerCustomerForm.setEmail("invalid.email@invalid");
+        registerCustomerForm.setEmail(invalidEmail);
         registerCustomerForm.setBirthDate(LocalDate.of(2050, 1, 1));
         String payload = gson.toJson(registerCustomerForm);
 
-        when(customerService.registerCustomer(registerCustomerForm)).thenReturn(1L);
+        when(customerService.registerCustomer(registerCustomerForm, invalidEmail)).thenReturn(1L);
 
         mockMvc.perform(post(URL_CUSTOMERS).content(payload).contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isBadRequest())

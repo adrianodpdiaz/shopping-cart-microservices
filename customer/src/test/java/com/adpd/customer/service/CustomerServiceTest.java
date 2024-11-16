@@ -2,10 +2,11 @@ package com.adpd.customer.service;
 
 import com.adpd.amqp.producer.RabbitMQMessageProducer;
 import com.adpd.customer.entity.Customer;
-import com.adpd.customer.mapping.CustomerMapperImpl;
+import com.adpd.customer.mapping.CustomerMapper;
 import com.adpd.customer.repository.CustomerRepository;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.dto.CustomerDTO;
+import com.adpd.customer.util.CustomerTestParent;
+import com.adpd.feignclients.resource.dto.CustomerDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,19 +15,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static com.adpd.customer.util.CustomerTestUtil.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerServiceTest {
+class CustomerServiceTest extends CustomerTestParent {
 
     @Mock
     private CustomerRepository customerRepository;
     @Mock
-    private CustomerMapperImpl customerMapper;
+    private CustomerMapper customerMapper;
     @Mock
     private RabbitMQMessageProducer rabbitMQMessageProducer;
     @InjectMocks
@@ -42,7 +42,7 @@ class CustomerServiceTest {
         when(customerMapper.requestToEntity(any())).thenReturn(customer);
         when(customerRepository.saveAndFlush(customer)).thenReturn(customer);
 
-        Long customerId = customerService.registerCustomer(registerCustomerForm);
+        Long customerId = customerService.registerCustomer(registerCustomerForm, TEST_EMAIL);
 
         assertEquals(registerCustomerForm.getFirstName(), customer.getFirstName());
         assertEquals(registerCustomerForm.getLastName(), customer.getLastName());

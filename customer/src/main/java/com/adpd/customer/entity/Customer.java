@@ -7,6 +7,8 @@ import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -24,11 +26,11 @@ public class Customer implements Serializable {
     @SequenceGenerator(name = "customer_info_id_sequence", sequenceName = "customer_info_id_sequence")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer_info_id_sequence")
     private Long id;
-    @NotNull
     @Column
+    @NotNull(message = "first name column cannot be null")
     private String firstName;
-    @NotNull
     @Column
+    @NotNull(message = "last name column cannot be null")
     private String lastName;
     @NotNull(message = "e-mail column cannot be null")
     @Column(unique = true)
@@ -37,6 +39,9 @@ public class Customer implements Serializable {
     private LocalDate birthDate;
     @Column(name = "tax_id")
     private String taxId;
+
+    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Address> addresses;
 
     @Override
     public boolean equals(Object o) {

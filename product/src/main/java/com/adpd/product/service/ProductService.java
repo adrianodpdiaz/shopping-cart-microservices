@@ -39,8 +39,8 @@ public class ProductService {
 
     public ProductDTO getProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        String.format("Register not found for product with id: %d", id)));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                String.format("Register not found for product with id: %d", id)));
         return productMapper.toDTO(product);
     }
 }

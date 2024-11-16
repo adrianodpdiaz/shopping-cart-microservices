@@ -1,6 +1,5 @@
 package com.adpd.auth.controller;
 
-
 import com.adpd.auth.resource.dto.AuthenticationDTO;
 import com.adpd.auth.resource.form.AuthenticateForm;
 import com.adpd.auth.service.AuthService;

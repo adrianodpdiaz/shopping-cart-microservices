@@ -2,27 +2,22 @@ package com.adpd.customer.mapping;
 
 import com.adpd.customer.entity.Customer;
 import com.adpd.customer.resource.form.RegisterCustomerForm;
-import com.adpd.customer.resource.dto.CustomerDTO;
+import com.adpd.customer.util.CustomerTestParent;
+import com.adpd.feignclients.resource.dto.CustomerDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static com.adpd.customer.util.CustomerTestUtil.mockCustomer;
-import static com.adpd.customer.util.CustomerTestUtil.mockRegisterCustomerForm;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-@ExtendWith(MockitoExtension.class)
-class CustomerMapperTest {
-
-    @InjectMocks
-    private CustomerMapperImpl customerMapper;
+@ExtendWith(SpringExtension.class)
+class CustomerMapperTest extends CustomerTestParent {
 
     @Test
     void testNullMappings() {
-        Customer customer = customerMapper.requestToEntity(null);
-        CustomerDTO customerDTO = customerMapper.toDTO(null);
+        Customer customer = CustomerMapper.INSTANCE.requestToEntity(null);
+        CustomerDTO customerDTO = CustomerMapper.INSTANCE.toDTO(null);
 
         assertNull(customer);
         assertNull(customerDTO);
@@ -32,7 +27,7 @@ class CustomerMapperTest {
     void testMappingFormToEntity() {
         RegisterCustomerForm registerCustomerForm = mockRegisterCustomerForm();
 
-        Customer customer = customerMapper.requestToEntity(registerCustomerForm);
+        Customer customer = CustomerMapper.INSTANCE.requestToEntity(registerCustomerForm);
 
         assertEquals(registerCustomerForm.getFirstName(), customer.getFirstName());
         assertEquals(registerCustomerForm.getLastName(), customer.getLastName());
@@ -44,7 +39,7 @@ class CustomerMapperTest {
     void testMappingEntityToDTO() {
         Customer customer = mockCustomer(1L);
 
-        CustomerDTO customerDTO = customerMapper.toDTO(customer);
+        CustomerDTO customerDTO = CustomerMapper.INSTANCE.toDTO(customer);
 
         assertEquals(customer.getFirstName(), customerDTO.getFirstName());
         assertEquals(customer.getLastName(), customerDTO.getLastName());
